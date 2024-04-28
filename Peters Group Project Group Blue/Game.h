@@ -1,6 +1,7 @@
 // Name: Leo Bolaks
 // Login: C00299368
-// Work Done: 
+// Work Done: added difficulty increasing, game reset function, game states, collisions between small and big apples and gregor, game state switch when gregor is dead
+// 
 //----------------------------------------------------------------------------------------------------------------
 // Name: Elisabeth Sykorova
 // Login: C00301316
@@ -23,6 +24,7 @@
 enum class GameStates
 {
 	Menu,
+	Settings,
 	Game
 };
 class Game
@@ -67,6 +69,9 @@ private:
 	sf::Text m_welcomeMessage; // text used for message on screen
 	sf::Texture m_logoTexture; // texture used for sfml logo
 	sf::Sprite m_logoSprite; // sprite used for sfml logo
+
+	sf::RectangleShape m_instructionsPlaceHolder;
+
 	bool m_exitGame; // control exiting game
 	bool m_gamePlayed = false;
 
@@ -82,6 +87,7 @@ private:
 	Gregor gregor;
 	BigApple bigApples[MAX_BIG_APPLES];
 	Menu menu;
+	Settings settings;
 
 	// mouse point
 	sf::Vector2f m_mouseEndVector;

@@ -191,6 +191,7 @@ void Game::render()
 	if (m_gameState == GameStates::Menu)
 	{
 		m_window.draw(m_backgroundSprite);
+		m_window.draw(m_instructionsPlaceHolder);
 		m_window.draw(menu.getStartGameSprite());
 		m_window.draw(menu.getSoundButton());
 	}
@@ -260,6 +261,12 @@ void Game::loadBackground()
 	}
 
 	m_backgroundSprite.setTexture(m_startBg);
+
+	m_instructionsPlaceHolder.setSize(sf::Vector2f{ 50, 50 });
+	m_instructionsPlaceHolder.setFillColor(sf::Color::Transparent);
+	m_instructionsPlaceHolder.setOutlineColor(sf::Color::Red);
+	m_instructionsPlaceHolder.setOutlineThickness(5);
+	m_instructionsPlaceHolder.setPosition(550, 550);
 }
 
 void Game::processMouseMove(sf::Event t_event)
