@@ -15,11 +15,18 @@ class Instructions
 	sf::Texture m_bigAppleExample; // set up for big apple example image
 	sf::Sprite m_bigAppleExampleSprite;
 
+	sf::Texture m_homeButtonTexture;
+	sf::Sprite m_homeButtonSprite;
+
 public:
 	Instructions();
 
 	void loadInstructions();
 
 	sf::Text getControlsText();
+	sf::Text getStoryText();
+	sf::Sprite getSmallAppleExample();
+	sf::Sprite getBigAppleExample();
+	sf::Sprite getHomeButton();
 };
 #endif

@@ -97,6 +97,10 @@ void Game::processEvents()
 				soundButtonCollision();
 				menuCollisions();
 			}
+			if (m_gameState == GameStates::Instructions)
+			{
+				instructionsButton();
+			}
 		}
 		
 	}
@@ -125,6 +129,10 @@ void Game::update(sf::Time t_deltaTime)
 	if (m_exitGame)
 	{
 		m_window.close();
+	}
+	if (m_gameState == GameStates::Instructions)
+	{
+
 	}
 	if (m_gameState == GameStates::Game)
 	{
@@ -190,10 +198,19 @@ void Game::update(sf::Time t_deltaTime)
 void Game::render()
 {
 	m_window.clear(sf::Color::White);
+	if (m_gameState == GameStates::Instructions);
+	{
+		m_window.draw(m_backgroundSprite);
+		m_window.draw(instructions.getStoryText());
+		m_window.draw(instructions.getControlsText());
+		m_window.draw(instructions.getSmallAppleExample());
+		m_window.draw(instructions.getBigAppleExample());
+		m_window.draw(instructions.getHomeButton());
+	}
 	if (m_gameState == GameStates::Menu)
 	{
 		m_window.draw(m_backgroundSprite);
-		m_window.draw(m_instructionsPlaceHolder);
+		m_window.draw(m_instructionsIconSprite);
 		m_window.draw(menu.getStartGameSprite());
 		m_window.draw(menu.getSoundButton());
 
@@ -274,12 +291,14 @@ void Game::loadBackground()
 	}
 
 	m_backgroundSprite.setTexture(m_startBg);
-
-	m_instructionsPlaceHolder.setSize(sf::Vector2f{ 50, 50 });
-	m_instructionsPlaceHolder.setFillColor(sf::Color::Transparent);
-	m_instructionsPlaceHolder.setOutlineColor(sf::Color::Red);
-	m_instructionsPlaceHolder.setOutlineThickness(5);
-	m_instructionsPlaceHolder.setPosition(550, 550);
+	
+	if (!m_instructionsIconTexture.loadFromFile("ASSETS\\IMAGES\\instructions_icon.png"))
+	{
+		std::cout << "Error loading instructions icon" << std::endl;
+	}
+	m_instructionsIconSprite.setTexture(m_instructionsIconTexture);
+	m_instructionsIconSprite.setScale(0.1, 0.1);
+	m_instructionsIconSprite.setPosition(550, 550);
 }
 
 void Game::processMouseMove(sf::Event t_event)
@@ -375,6 +394,10 @@ void Game::menuCollisions()
 		m_gameState = GameStates::Game;
 		m_backgroundSprite.setTexture(m_gameplayBg);
 	}
+	if (m_mouseDot.getGlobalBounds().intersects(m_instructionsIconSprite.getGlobalBounds()))
+	{
+		m_gameState = GameStates::Instructions;
+	}
 
 }
 
@@ -396,6 +419,14 @@ void Game::soundButtonCollision()
 	{
 		gregor.soundIsOn(!menu.getSoundOn());
 		menu.soundIsOn(!menu.getSoundOn()); // has to be last if negating 
+	}
+}
+
+void Game::instructionsButton()
+{
+	if (m_mouseDot.getGlobalBounds().intersects(instructions.getHomeButton().getGlobalBounds()))
+	{
+		m_gameState = GameStates::Menu;
 	}
 }
 
