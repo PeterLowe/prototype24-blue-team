@@ -95,12 +95,12 @@ void Menu::animateSprites()
 
 void Menu::changeToRed()
 {
-	m_startGameSprite.setColor(sf::Color::Red);
+	m_startGameSprite.setColor(sf::Color(232, 37, 37));
 }
 
 void Menu::changeToWhite()
 {
-	m_startGameSprite.setColor(sf::Color::White);
+	m_startGameSprite.setColor(sf::Color(229,227,222));
 }
 
 /// <summary>

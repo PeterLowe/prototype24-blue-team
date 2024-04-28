@@ -6,9 +6,6 @@
 /// </summary>
 
 #include "Game.h"
-#include <iostream>
-#include "ctime"
-#include"cstdlib"
 
 
 
@@ -131,6 +128,8 @@ void Game::update(sf::Time t_deltaTime)
 	}
 	if (m_gameState == GameStates::Game)
 	{
+		updateTime();
+
 		if (m_backgroundMusic.getStatus() != sf::Sound::Stopped) // later swap for a different sound
 		{
 			m_backgroundMusic.stop();
@@ -178,6 +177,9 @@ void Game::update(sf::Time t_deltaTime)
 		else
 		{
 			menu.setStartButtonState(1);
+			m_endGameMessage.setString("You kept Gregor alive for " + std::to_string(m_minutes) + " minutes and " + std::to_string(m_seconds) + " seconds and saved him from " + std::to_string(m_deflections) + " apples.");
+			m_endGameMessage.setOrigin(m_endGameMessage.getGlobalBounds().width / 2, m_endGameMessage.getGlobalBounds().height / 2);
+			m_endGameMessage.setPosition(SCREEN_WIDTH_BIG_APPLE / 2, SCREEN_HEIGHT_BIG_APPLE / 2 + 100);
 		}
 	}
 }
@@ -194,10 +196,15 @@ void Game::render()
 		m_window.draw(m_instructionsPlaceHolder);
 		m_window.draw(menu.getStartGameSprite());
 		m_window.draw(menu.getSoundButton());
+
+		if (m_gamePlayed)
+		{
+			m_window.draw(m_endGameMessage);
+		}
 	}
 	if (m_gameState == GameStates::Game)
 	{
-		m_window.draw(m_backgroundSprite);
+		m_window.draw(m_backgroundSprite); // first
 		m_window.draw(gregor.getGregor());
 		//m_window.draw(gregor.getGregorHitbox());
 		for (int index = 0; index < m_activeSmallApple; index++)
@@ -211,6 +218,7 @@ void Game::render()
 		m_window.draw(m_mouseDot);
 		m_window.draw(gregor.getGregor());
 		m_window.draw(gregor.getHearts());
+		m_window.draw(m_timeElapsed);
 	}
 	m_window.display();
 }
@@ -220,18 +228,23 @@ void Game::render()
 /// </summary>
 void Game::setupFontAndText()
 {
-	if (!m_ArialBlackfont.loadFromFile("ASSETS\\FONTS\\ariblk.ttf"))
+	if (!m_gregorFont.loadFromFile("ASSETS\\FONTS\\GregorFont.ttf"))
 	{
-		std::cout << "problem loading arial black font" << std::endl;
+		std::cout << "problem loading gregor font" << std::endl;
 	}
-	m_welcomeMessage.setFont(m_ArialBlackfont);
-	m_welcomeMessage.setString("SFML Game");
-	m_welcomeMessage.setStyle(sf::Text::Underlined | sf::Text::Italic | sf::Text::Bold);
-	m_welcomeMessage.setPosition(40.0f, 40.0f);
-	m_welcomeMessage.setCharacterSize(80U);
-	m_welcomeMessage.setOutlineColor(sf::Color::Red);
-	m_welcomeMessage.setFillColor(sf::Color::Black);
-	m_welcomeMessage.setOutlineThickness(3.0f);
+
+	m_timeElapsed.setFont(m_gregorFont);
+	m_timeElapsed.setString("Time "); // initializing only
+	m_timeElapsed.setCharacterSize(50);
+	m_timeElapsed.setFillColor(sf::Color(229, 227, 222));
+	m_timeElapsed.setPosition(0 + 20, 0 + 20);
+
+	m_endGameMessage.setFont(m_gregorFont);
+	m_endGameMessage.setString("Time "); // initializing only
+	m_endGameMessage.setCharacterSize(32);
+	m_endGameMessage.setFillColor(sf::Color(229, 227, 222));
+	m_endGameMessage.setOrigin(m_endGameMessage.getGlobalBounds().width / 2, m_endGameMessage.getGlobalBounds().height / 2);
+	m_endGameMessage.setPosition(SCREEN_WIDTH_BIG_APPLE/2, SCREEN_HEIGHT_BIG_APPLE/2 + 100);
 
 }
 
@@ -420,6 +433,31 @@ void Game::addEnemies()
 	}
 }
 
+void Game::updateTime()
+{
+	std::string m_timeString;
+	std::string null = ""; // placeholder for double digit seconds
+	std::string divider = ":"; // divider between minutes and seconds
+	m_secondsCounter += 1 / 60.0f; // update every 1/60th of a second
+	m_seconds = static_cast<int>(m_secondsCounter);
+
+	if (m_seconds % 60 == 0 && m_seconds != m_secondsLastChecked) // if the seconds are divisible by 60, it means a minute has passed - this has to be updated once only
+	{
+		m_minutes++;
+		m_secondsCounter = 0.0f;
+		m_seconds = 0;
+		m_secondsLastChecked = m_seconds;
+	}
+
+	if (m_seconds < 10) // placeholder zero
+	{
+		null = "0";
+	}
+
+	m_timeString = std::to_string(m_minutes) + divider + null + std::to_string(m_seconds);
+	m_timeElapsed.setString(m_timeString);
+}
+
 void Game::gameReset()
 {
 	m_deflections = 0;
@@ -436,6 +474,11 @@ void Game::gameReset()
 	}
 
 	gregor.gregorReset();
+
+	m_secondsCounter = 0.0f;
+	m_seconds = 0;
+	m_minutes = 0;
+	m_secondsLastChecked = m_seconds;
 
 }
 
