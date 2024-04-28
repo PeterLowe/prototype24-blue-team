@@ -210,9 +210,9 @@ void Game::render()
 	if (m_gameState == GameStates::Menu)
 	{
 		m_window.draw(m_backgroundSprite);
-		m_window.draw(m_instructionsIconSprite);
 		m_window.draw(menu.getStartGameSprite());
 		m_window.draw(menu.getSoundButton());
+		m_window.draw(m_instructionsIconSprite);
 
 		if (m_gamePlayed)
 		{
@@ -297,7 +297,6 @@ void Game::loadBackground()
 		std::cout << "Error loading instructions icon" << std::endl;
 	}
 	m_instructionsIconSprite.setTexture(m_instructionsIconTexture);
-	m_instructionsIconSprite.setScale(0.1, 0.1);
 	m_instructionsIconSprite.setPosition(550, 550);
 }
 
