@@ -2,6 +2,7 @@
 
 #include "BigApple.h"
 #include <iostream>
+#include <cmath>
 
 BigApple::BigApple()
 {
@@ -10,7 +11,7 @@ BigApple::BigApple()
 
 void BigApple::loadBigApple()
 {
-	if (!m_texture.loadFromFile("ASSETS\\IMAGES\\bigAppleAnimated.png"))
+	if (!m_texture.loadFromFile("ASSETS/IMAGES/bigAppleAnimated.png"))
 	{
 		std::cout << "problem loading small apple texture" << std::endl;
 	}
