@@ -12,7 +12,7 @@ Menu::Menu()
 
 void Menu::loadMenu()
 {
-	if (!m_saveGregorFont.loadFromFile("ASSETS\\FONTS\\GregorFont.ttf"))
+	if (!m_saveGregorFont.loadFromFile("ASSETS/FONTS/GregorFont.ttf"))
 	{
 		std::cout << "Error loading gregor font" << std::endl;
 	}
@@ -26,11 +26,11 @@ void Menu::loadMenu()
 
 void Menu::loadSoundButton()
 {
-	if (!m_soundOnTexture.loadFromFile("ASSETS\\IMAGES\\music_on.png"))
+	if (!m_soundOnTexture.loadFromFile("ASSETS/IMAGES/music_on.png"))
 	{
 		std::cout << "Error loading sounds on" << std::endl;
 	}
-	if (!m_soundOffTexture.loadFromFile("ASSETS\\IMAGES\\music_off.png"))
+	if (!m_soundOffTexture.loadFromFile("ASSETS/IMAGES/music_off.png"))
 	{
 		std::cout << "Error loading sounds off" << std::endl;
 	}
@@ -47,7 +47,7 @@ sf::Sprite Menu::getSoundButton()
 
 void Menu::loadSprites()
 {
-	if (!m_startGameTexture.loadFromFile("ASSETS\\IMAGES\\start_game_button.png"))
+	if (!m_startGameTexture.loadFromFile("ASSETS/IMAGES/start_game_button.png"))
 	{
 		std::cout << "Error loading start button textures" << std::endl;
 	}

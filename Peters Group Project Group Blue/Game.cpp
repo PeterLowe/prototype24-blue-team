@@ -260,7 +260,7 @@ void Game::render()
 /// </summary>
 void Game::setupFontAndText()
 {
-	if (!m_gregorFont.loadFromFile("ASSETS\\FONTS\\GregorFont.ttf"))
+	if (!m_gregorFont.loadFromFile("ASSETS/FONTS/GregorFont.ttf"))
 	{
 		std::cout << "problem loading gregor font" << std::endl;
 	}
@@ -284,7 +284,7 @@ void Game::setupFontAndText()
 	m_appleCountText.setFillColor(sf::Color(229, 227, 222));
 	m_appleCountText.setPosition(0 + 60, 0 + 90);
 
-	if (!m_appleCountTexture.loadFromFile("ASSETS\\IMAGES\\apple_indicator.png"))
+	if (!m_appleCountTexture.loadFromFile("ASSETS/IMAGES/apple_indicator.png"))
 	{
 		std::cout << "problem loading apple indicator" << std::endl;
 	}
@@ -308,19 +308,19 @@ void Game::setupMouseDot() // circle shape
 
 void Game::loadBackground()
 {
-	if (!m_startBg.loadFromFile("ASSETS\\IMAGES\\bg.png")) // standard menu bg
+	if (!m_startBg.loadFromFile("ASSETS/IMAGES/bg.png")) // standard menu bg
 	{
 		// simple error message if previous call fails
 		std::cout << "problem loading start bg" << std::endl;
 	}
 
-	if (!m_gameplayBg.loadFromFile("ASSETS\\IMAGES\\tiles_lighter.png")) // standard gameplay bg
+	if (!m_gameplayBg.loadFromFile("ASSETS/IMAGES/tiles_lighter.png")) // standard gameplay bg
 	{
 		// simple error message if previous call fails
 		std::cout << "problem loading game bg" << std::endl;
 	}
 
-	if (!m_endBg.loadFromFile("ASSETS\\IMAGES\\bgdeath.png")) // menu bg after a game was played and stats are shown
+	if (!m_endBg.loadFromFile("ASSETS/IMAGES/bgdeath.png")) // menu bg after a game was played and stats are shown
 	{
 		// simple error message if previous call fails
 		std::cout << "problem loading end bg" << std::endl;
@@ -330,7 +330,7 @@ void Game::loadBackground()
 
 	m_backgroundSprite.setTexture(m_startBg);
 
-	if (!m_instructionsIconTexture.loadFromFile("ASSETS\\IMAGES\\instructions_icon.png"))
+	if (!m_instructionsIconTexture.loadFromFile("ASSETS/IMAGES/instructions_icon.png"))
 	{
 		std::cout << "Error loading instructions icon" << std::endl;
 	}
@@ -338,7 +338,7 @@ void Game::loadBackground()
 	m_instructionsIconSprite.setScale(0.7, 0.7);
 	m_instructionsIconSprite.setPosition(0 + 120, SCREEN_HEIGHT_BIG_APPLE - 90);
 
-	if (!m_instructionsBg.loadFromFile("ASSETS\\IMAGES\\instructions_bg.png"))
+	if (!m_instructionsBg.loadFromFile("ASSETS/IMAGES/instructions_bg.png"))
 	{
 		// simple error message if previous call fails
 		std::cout << "problem loading instructions bg" << std::endl;

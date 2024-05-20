@@ -12,7 +12,7 @@ Gregor::Gregor()
 
 void Gregor::loadGregor()
 {
-	if (!m_gregorTexture.loadFromFile("ASSETS\\IMAGES\\gregor.png"))
+	if (!m_gregorTexture.loadFromFile("ASSETS/IMAGES/gregor.png"))
 	{
 		std::cout << "Error loading gregor" << std::endl;
 	}
@@ -33,7 +33,7 @@ void Gregor::loadGregor()
 
 void Gregor::loadSound()
 {
-	if (!m_stepsBuffer.loadFromFile("ASSETS\\AUDIO\\gregor_walk.wav"))
+	if (!m_stepsBuffer.loadFromFile("ASSETS/AUDIO/gregor_walk.wav"))
 	{
 		std::cout << "Error loading gregor walk sound effect" << std::endl;
 	}
@@ -256,7 +256,7 @@ void Gregor::gregorReset()
 
 void Gregor::loadHearts()
 {
-	if (!m_heartsTexture.loadFromFile("ASSETS\\IMAGES\\hearts_spritesheet.png"))
+	if (!m_heartsTexture.loadFromFile("ASSETS/IMAGES/hearts_spritesheet.png"))
 	{
 		std::cout << "Error loading hearts" << std::endl;
 	}

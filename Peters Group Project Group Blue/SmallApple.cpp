@@ -3,6 +3,7 @@
 #include "SmallApple.h"
 #include <iostream>
 #include <iostream>
+#include <cmath>
 #include "ctime"
 #include "cstdlib"
 
@@ -15,7 +16,7 @@ SmallApple::SmallApple()
 
 void SmallApple::loadSmallApple()
 {
-	if (!m_texture.loadFromFile("ASSETS\\IMAGES\\smallAppleAnimated.png"))
+	if (!m_texture.loadFromFile("ASSETS/IMAGES/smallAppleAnimated.png"))
 	{
 		std::cout << "problem loading small apple texture" << std::endl;
 	}
